@@ -26,20 +26,20 @@ const userSchema = new mongoose.Schema({
 
 // Using pre method hashing the password
 
-userSchema.pre('save', async function(next){
-    const user = this;
-    if(!user.isModified('password')){
-        next();
-    }
+// userSchema.pre('save', async function(next){
+//     const user = this;
+//     if(!user.isModified('password')){
+//         next();
+//     }
 
-    try {
-        const salt_round = await bcrypt.genSalt(10);
-        const hashedpassword = await bcrypt.hash(user.password, salt_round);
-        user.password = hashedpassword;
-    } catch (error) {
-        next(error);
-    }
-});
+//     try {
+//         const salt_round = await bcrypt.genSalt(10);
+//         const hashedpassword = await bcrypt.hash(user.password, salt_round);
+//         user.password = hashedpassword;
+//     } catch (error) {
+//         next(error);
+//     }
+// });
 
 
 
