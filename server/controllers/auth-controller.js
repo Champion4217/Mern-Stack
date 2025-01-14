@@ -30,7 +30,8 @@ const register = async(req, res, next) => {
         return res.status(200).json({
             success: true,
             message: "User Created Successfully",
-            data
+            token: await data.generateToken(),
+            userId: data._id.toString()
         });
     } catch (error) {
         return res.status(500).json({
@@ -41,7 +42,44 @@ const register = async(req, res, next) => {
     }
 };
 
+const login = async(req, res, next) => {
+    try {
+        const {email, password} = req.body;
+
+        const userExists = await User.findOne({email});
+
+        if(!userExists){
+            return res.status(400).json({
+                success: false,
+                message: "Invalid Email or Password"
+            })
+        };
+
+
+        const user = await userExists.comparePassword(password);
+
+        if(!user){
+           return res.status(400).json({
+            success: false,
+            message: "Invalid Email or Password"
+           })
+        };
+
+        return res.status(200).json({
+            success: true,
+            message: `Login Successfully ${userExists.username}`,
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Internal Server Error",
+            error: error.message
+        })
+    }
+}
+
 module.exports = {
-    register
+    register,
+    login
 }
 
