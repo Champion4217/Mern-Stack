@@ -6,14 +6,14 @@ import Contact from './Pages/Contact.jsx';
 import Services from './Pages/Services.jsx';
 import Login from './Pages/Login.jsx';
 import Signup from './Pages/Signup.jsx';
-import Navbar from './components/Navbar.jsx';
 import { CssVarsProvider } from "@mui/joy/styles";
+
 
 const App = () => {
   return (
     <CssVarsProvider>
       <BrowserRouter>
-        <Navbar /> 
+        
         <Routes>
           <Route path='/home' element={<Home />} />
           <Route path='/about' element={<About />} />

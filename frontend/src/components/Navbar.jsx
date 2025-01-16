@@ -6,9 +6,9 @@ import Stack from "@mui/joy/Stack";
 import logo from "../assests/slnko.png";
 import { Link } from "react-router-dom";
 import Grid from "@mui/joy/Grid";
-import { IconButton, Drawer, ListItemButton } from "@mui/joy";
+import { IconButton, Drawer } from "@mui/joy";
 import MenuIcon from "@mui/icons-material/Menu";
-
+import Button from "@mui/joy/Button";
 const Navbar = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -17,46 +17,39 @@ const Navbar = () => {
   };
 
   return (
-    <Box sx={{ padding: 2, width: "100%", backgroundColor: "primary.light" }}>
-      <Stack
-        sx={{
-          px: { sm: 6, md: 6 },
-        }}
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-      >
+    <Box>
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Grid
           sx={{
             px: { sm: 2, md: 2 },
+            display: { xs: "none", sm: "none", md: "block" },
           }}
         >
           <img alt="logo" src={logo} width={"50%"} />
         </Grid>
 
-        <Grid sx={{ display: { xs: "block", sm:"block", md: "none" } }}>
-          <IconButton
-            onClick={toggleDrawer(true)}
-            sx={{ color: "blue" }}
-          >
+        <Grid sx={{ display: { xs: "block", sm: "block", md: "none" } }}>
+          <IconButton onClick={toggleDrawer(true)} sx={{ color: "blue" }}>
             <MenuIcon />
           </IconButton>
         </Grid>
 
         <Grid
           sx={{
-            display: { xs: "none", sm: "none", md: 'block' },
+            display: { xs: "none", sm: "none", md: "block" },
           }}
         >
           <List orientation="horizontal">
-            {["Home", "About", "Contact", "Services", "Login", "Register"].map(
+            {["Home", "About", "Contact", "Services", "Login", "Signup"].map(
               (item) => (
                 <ListItem
                   key={item}
                   sx={{
-                    color: "blue",
+                    color: "black",
                     cursor: "pointer",
-                    "&:hover": { textDecoration: "underline", color: "black" },
+                    fontSize:'20px',
+                    fontFamily:'cursive',
+                    "&:hover": { textDecoration: "underline", color: "blue" },
                   }}
                 >
                   <Link
@@ -74,45 +67,68 @@ const Navbar = () => {
       </Stack>
 
       <Drawer
-        anchor="right"
+        anchor="left"
         open={openDrawer}
         onClose={toggleDrawer(false)}
         sx={{
-          display: { xs: "block", sm: "block", md: 'none' },
+          display: { xs: "block", sm: "block", md: "none" },
         }}
       >
         <Box
           sx={{
             width: 250,
-            padding: 2,
+            display: "flex",
+            flexDirection: "column",
+            height: "100vh",
+            padding: 1,
           }}
           role="presentation"
           onClick={toggleDrawer(false)}
           onKeyDown={toggleDrawer(false)}
         >
+          <Box sx={{ marginBottom: 2 }}>
+            <img alt="logo" src={logo} width={"50%"} />
+          </Box>
+
           <List>
-            {["Home", "About", "Contact", "Services", "Login", "Register"].map(
-              (item) => (
-                <ListItem key={item} 
-                sx={{
-                  color: "blue",
-                  cursor: 'pointer',
-                  "&:hover": { textDecoration: "underline", color: "black" },
-                }}
-                disablePadding>
-                  <ListItemButton>
-                    <Link
-                      to={`/${item.toLowerCase()}`}
-                      style={{ textDecoration: "none", color: "blue" }}
-                      aria-label={`Navigate to ${item}`}
-                    >
-                      {item}
-                    </Link>
-                  </ListItemButton>
-                </ListItem>
-              )
-            )}
+            {["Home", "About", "Contact", "Services"].map((item) => (
+              <ListItem key={item}>
+                <Button sx={{ width: "50%" }} variant="outlined">
+                  <Link
+                    to={`/${item.toLowerCase()}`}
+                    style={{ textDecoration: "none", color: "blue" }}
+                    aria-label={`Navigate to ${item}`}
+                  >
+                    {item}
+                  </Link>
+                </Button>
+              </ListItem>
+            ))}
           </List>
+
+          <Box sx={{ flexGrow: 1 }} />
+
+          <Stack direction="row" spacing={2} justifyContent="center">
+            <Button
+              variant="outlined"
+              component={Link}
+              to="/login"
+              aria-label="Navigate to Login"
+              sx={{ width: "50%", color: "blue" }}
+            >
+              Login
+            </Button>
+
+            <Button
+              variant="outlined"
+              component={Link}
+              to="/signup"
+              aria-label="Navigate to Register"
+              sx={{ width: "50%", color: "blue" }}
+            >
+              SignUp
+            </Button>
+          </Stack>
         </Box>
       </Drawer>
     </Box>
