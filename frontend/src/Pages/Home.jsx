@@ -28,6 +28,9 @@ const Home = () => {
         sx={{
           width: "80%",
           margin: "0 auto",
+          "@media (max-width: 600px)": {
+            width: "95%", // For small screens, make it 95% width
+          },
         }}
       >
         <Navbar />
@@ -36,27 +39,32 @@ const Home = () => {
       <Box
         sx={{
           width: "80%",
-
           margin: "10vh auto",
           color: "white",
           display: "flex",
-          flexDirection: "row",
+          flexDirection: { xs: "column", sm: "row" }, // Stack content on small screens
           justifyContent: "space-between",
           alignItems: "center",
           borderRadius: "12px",
           overflow: "hidden",
           padding: "20px",
+          "@media (max-width: 600px)": {
+            width: "100%", // For small screens, make it 95% width
+          },
         }}
       >
         <Box
           sx={{
             flex: 1,
             paddingRight: "20px",
+            "@media (max-width: 600px)": {
+              paddingRight: "0", // No padding on small screens
+            },
           }}
         >
           <Typography
             component="h1"
-            fontSize="60px"
+            fontSize={{ xs: "40px", sm: "40px" }} // Adjust font size for small screens
             fontWeight="bold"
             fontFamily="sans-serif"
             color="primary"
@@ -64,7 +72,7 @@ const Home = () => {
             Where{" "}
             <Typography
               component="span"
-              fontSize="60px"
+              fontSize={{ xs: "40px", sm: "40px" }} // Adjust font size for small screens
               fontWeight="bold"
               fontFamily="sans-serif"
               color="success"
@@ -81,7 +89,7 @@ const Home = () => {
             component="h3"
             paddingTop="20px"
             fontFamily="cursive"
-            fontSize="20px"
+            fontSize={{ xs: "16px", sm: "18px" }} // Adjust font size for small screens
           >
             One-stop platform for providing Solar Developers, EPC & Installers.
             Horizon of our services expands through Engineering, SCM (Supply
@@ -94,32 +102,47 @@ const Home = () => {
           <Box
             sx={{
               paddingTop: "20px",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              gap: "10px", // Add space between buttons on smaller screens
             }}
           >
-            <Button
+            <Box
               sx={{
-                borderRadius: "20px",
-                width: "15%",
+                width: { xs: "40%", sm: "30%" }, // Adjust width for small screens
               }}
-              component={Link}
-              to="/about"
             >
-              Read More
-            </Button>
-
-            <Button
+              <Button
+                sx={{
+                  borderRadius: "20px",
+                  width: "100%",
+                }}
+                component={Link}
+                to="/about"
+              >
+                Read More
+              </Button>
+            </Box>
+            <Box
               sx={{
-                borderRadius: "20px",
-                width: "15%",
-                fontWeight: "bold",
-                fontSize: "15px",
+                width: { xs: "40%", sm: "30%" }, // Adjust width for small screens
               }}
-              component={Link}
-              to="/contact"
-              variant="outlined"
             >
-              Contact Us
-            </Button>
+              <Button
+                sx={{
+                  borderRadius: "20px",
+                  fontWeight: "bold",
+                  fontSize: "15px",
+                  width: "100%",
+                }}
+                component={Link}
+                to="/contact"
+                variant="outlined"
+              >
+                Contact Us
+              </Button>
+            </Box>
           </Box>
         </Box>
 
@@ -129,6 +152,9 @@ const Home = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            "@media (max-width: 1000px)": {
+              display: "none", // Hide image on small screens
+            },
           }}
         >
           <img
@@ -160,6 +186,10 @@ const Home = () => {
             width: "70%",
             height: "70vh",
             margin: "10vh auto",
+            "@media (max-width: 800px)": {
+              width: "100%", // Adjust image width for small screens
+              height: "100vh", // Adjust image height for small screens
+            },
           }}
           alt="landing"
           src={img2}
@@ -167,10 +197,7 @@ const Home = () => {
       </Box>
 
       {/* Third Part */}
-
       <Cards />
-
-      
     </>
   );
 };

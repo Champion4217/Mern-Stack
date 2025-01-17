@@ -7,6 +7,7 @@ import Services from './Pages/Services.jsx';
 import Login from './Pages/Login.jsx';
 import Signup from './Pages/Signup.jsx';
 import { CssVarsProvider } from "@mui/joy/styles";
+import Footer from './components/Footer.jsx';
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </CssVarsProvider>
   );
