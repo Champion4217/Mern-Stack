@@ -64,7 +64,7 @@ const Home = () => {
         >
           <Typography
             component="h1"
-            fontSize={{ xs: "40px", sm: "40px" }} // Adjust font size for small screens
+            fontSize={{ xs: "40px", sm: "60px" }} // Adjust font size for small screens
             fontWeight="bold"
             fontFamily="sans-serif"
             color="primary"
@@ -72,7 +72,7 @@ const Home = () => {
             Where{" "}
             <Typography
               component="span"
-              fontSize={{ xs: "40px", sm: "40px" }} // Adjust font size for small screens
+              fontSize={{ xs: "40px", sm: "60px" }} // Adjust font size for small screens
               fontWeight="bold"
               fontFamily="sans-serif"
               color="success"

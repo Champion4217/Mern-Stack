@@ -14,12 +14,12 @@ const Footer = () => {
         alignItems:'center'
       }}
     >
-      
-       
-        
         <Box>
           <Typography sx={{
-            color:'white'
+            color:'white',
+            "@media (max-width: 500px)": {
+            fontSize: "15px", // For small screens, make it 95% width
+          },
           }}>
             © 2024 All rights reserved. SLnko Energy Pvt. Ltd.
           </Typography>

@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Typography } from "@mui/joy";
+import { Box, Card, CardContent, Typography, Grid } from "@mui/joy";
 import React from "react";
 import img1 from "../assests/slnko_landing2.jpg";
 import img2 from "../assests/slnko_landing3.jpg";
@@ -51,7 +51,7 @@ const Cards = () => {
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: 'column',
+          flexDirection: "column",
           alignItems: "center",
           zIndex: 1,
         }}
@@ -66,18 +66,21 @@ const Cards = () => {
         >
           Why SLnko
         </Typography>
-        <Box>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "20px",
-              paddingBottom: "20px",
-            }}
-          >
-            <Card sx={{ width: "20%", borderRadius: "20px" }}>
+
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: { xs: "column", sm: "row" }, // Responsive layout
+            gap: "20px",
+            paddingBottom: "20px",
+          }}
+        >
+          <Grid item xs={12} sm={4}>
+            <Card sx={{ borderRadius: "20px" }}>
               <CardContent>
                 <Typography component={"h1"}>Service with Perspective.</Typography>
                 <Typography
@@ -85,13 +88,15 @@ const Cards = () => {
                   sx={{ fontFamily: "cursive", color: "#21d0e2" }}
                 >
                   We listen to our clients to ensure that the project meets all
-                  aspects such as execution, durability, and operations there by
-                  creating higher value of money.
+                  aspects such as execution, durability, and operations thereby
+                  creating higher value for money.
                 </Typography>
               </CardContent>
             </Card>
+          </Grid>
 
-            <Card sx={{ width: "20%", borderRadius: "20px" }}>
+          <Grid item xs={12} sm={4}>
+            <Card sx={{ borderRadius: "20px" }}>
               <CardContent>
                 <Typography component={"h1"}>State-of-the-art Engineering</Typography>
                 <Typography
@@ -104,8 +109,10 @@ const Cards = () => {
                 </Typography>
               </CardContent>
             </Card>
+          </Grid>
 
-            <Card sx={{ width: "20%", borderRadius: "20px" }}>
+          <Grid item xs={12} sm={4}>
+            <Card sx={{ borderRadius: "20px" }}>
               <CardContent>
                 <Typography component={"h1"}>Hassle Free Procurement</Typography>
                 <Typography
@@ -113,22 +120,27 @@ const Cards = () => {
                   sx={{ fontFamily: "cursive", color: "#e7134d" }}
                 >
                   With our streamlined and transparent procurement processes, we
-                  deliver quality and cost-effective sourcing further ensuring
+                  deliver quality and cost-effective sourcing, ensuring
                   minimum time involvement of our client.
                 </Typography>
               </CardContent>
             </Card>
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "20px",
-            }}
-          >
-            <Card sx={{ width: "20%", borderRadius: "20px" }}>
+          </Grid>
+        </Grid>
+
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: { xs: "column", sm: "row" },
+            gap: "20px",
+          }}
+        >
+          <Grid item xs={12} sm={4}>
+            <Card sx={{ borderRadius: "20px" }}>
               <CardContent>
                 <Typography component={"h1"}>Quality Assured</Typography>
                 <Typography
@@ -141,8 +153,10 @@ const Cards = () => {
                 </Typography>
               </CardContent>
             </Card>
+          </Grid>
 
-            <Card sx={{ width: "20%", borderRadius: "20px" }}>
+          <Grid item xs={12} sm={4}>
+            <Card sx={{ borderRadius: "20px" }}>
               <CardContent>
                 <Typography component={"h1"}>Unwavering Support</Typography>
                 <Typography
@@ -155,8 +169,10 @@ const Cards = () => {
                 </Typography>
               </CardContent>
             </Card>
+          </Grid>
 
-            <Card sx={{ width: "20%", borderRadius: "20px" }}>
+          <Grid item xs={12} sm={4}>
+            <Card sx={{ borderRadius: "20px" }}>
               <CardContent>
                 <Typography component={"h1"}>Highly Skilled Team</Typography>
                 <Typography
@@ -169,78 +185,95 @@ const Cards = () => {
                 </Typography>
               </CardContent>
             </Card>
-          </Box>
-        </Box>
+          </Grid>
+        </Grid>
+      </Box>
 
-        {/* Fourth Part */}
-        <Box sx={{ display:'flex', justifyContent:'center', alignItems:'center',width: "100%", height: "50vh", paddingTop: "100px" }}>
+      {/* Fourth Part */}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          height: "50vh",
+          paddingTop: "100px",
+        }}
+      >
+        <Box
+          sx={{
+            width: "100%",
+            height: "40%",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-evenly",
+            zIndex: 1,
+            backgroundImage: `url(${img2})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            borderRadius: "20px",
+            overflow: "hidden",
+          }}
+        >
           <Box
             sx={{
-              width:'100%',
-              height: "40%",
               display: "flex",
-              flexDirection: "row",
+              flexDirection: "column",
+              justifyContent: "center",
               alignItems: "center",
-              justifyContent: "space-evenly",
-              zIndex: 1,
-              backgroundImage: `url(${img2})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              borderRadius: "20px",
-              overflow: "hidden",
             }}
           >
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Typography sx={{ color: "white", fontFamily: "fantasy", fontSize: "40px" }}>
-                {number.toLocaleString()} MT
-              </Typography>
-              <Typography component={"span"} sx={{ color: "whitesmoke" }}>
-                CO₂ mitigated per day
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Typography sx={{ color: "white", fontFamily: "fantasy", fontSize: "40px" }}>
-                2,600+MW
-              </Typography>
-              <Typography component={"span"} sx={{ color: "whitesmoke" }}>
-                Project Delivered
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Typography sx={{ color: "white", fontFamily: "fantasy", fontSize: "40px" }}>
-                100+
-              </Typography>
-              <Typography component={"span"} sx={{ color: "whitesmoke" }}>
-                Happy Clients
-              </Typography>
-            </Box>
+            <Typography sx={{ color: "white", fontFamily: "fantasy", "@media (max-width: 600px)": {fontSize: '20px'}, fontSize: "30px" }}>
+              {number.toLocaleString()} MT
+            </Typography>
+            <Typography component={"span"} sx={{ color: "whitesmoke" }}>
+              CO₂ mitigated per day
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Typography sx={{ color: "white", "@media (max-width: 600px)": {fontSize: '20px'}, fontFamily: "fantasy", fontSize: "40px" }}>
+              2,600+MW
+            </Typography>
+            <Typography component={"span"} sx={{ color: "whitesmoke" }}>
+              Project Delivered
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Typography sx={{ color: "white", "@media (max-width: 600px)": {fontSize: '20px'}, fontFamily: "fantasy", fontSize: "40px" }}>
+              100+
+            </Typography>
+            <Typography component={"span"} sx={{ color: "whitesmoke" }}>
+              Happy Clients
+            </Typography>
           </Box>
         </Box>
       </Box>
 
       {/* Our Clients Section */}
-      <Box sx={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent:'center'  }}>
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <Box>
           <Typography sx={{ fontSize: "30px" }} component={"h1"}>
             Our Clients
