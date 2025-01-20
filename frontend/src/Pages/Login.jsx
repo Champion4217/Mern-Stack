@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import {
   Box,
@@ -9,11 +9,69 @@ import {
   Link,
   Typography,
 } from "@mui/joy";
+import Axios from "../axios/Axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const navigate = useNavigate('');
+
+
+  const submitHandler = async(e) => {
+     e.preventDefault();
+     setLoading(true);
+
+     try {
+      const response = await Axios.post("/login", {
+        email,
+        password
+      });
+
+      console.log(response);
+
+      toast.success("Login Successfully!", {
+        position:"top-right",
+        autoClose:3000,
+        hideProgressBar:false,
+        closeOnClick:true,
+        pauseOnHover:true,
+        draggable:true,
+        theme:"colored"
+      });
+
+      setEmail('');
+      setPassword('');
+      setIsLoggedIn(true);
+      setTimeout(()=> {
+        navigate("/home");
+      }, 5000);
+     } catch (error) {
+        toast.error(error.response?.data?.message || "Login Failed!. Please Try Again", {
+          position:"top-right",
+          autoClose:3000,
+          draggable:true,
+          hideProgressBar:'false',
+          pauseOnHover:true,
+          closeOnClick:true,
+          theme:"colored"
+        })
+     } finally{
+      setLoading(false);
+     }
+  }
+
+
   return (
     <>
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn} onLogin={isLoggedIn} />
+      <ToastContainer />
       <Box
         sx={{
           width: "100%",
@@ -49,6 +107,8 @@ const Login = () => {
             Welcome Back!
           </Typography>
           <Box
+            component={'form'}
+            onSubmit={submitHandler}
             sx={{
               width: "100%",
               display: "flex",
@@ -65,6 +125,8 @@ const Login = () => {
                   borderRadius: "8px",
                   fontSize: "16px",
                 }}
+                value={email}
+                onChange={(e)=> setEmail(e.target.value)}
                 required
               />
             </FormControl>
@@ -77,10 +139,13 @@ const Login = () => {
                   borderRadius: "8px",
                   fontSize: "16px",
                 }}
+                value={password}
+                onChange={(e)=> setPassword(e.target.value)}
                 required
               />
             </FormControl>
             <Button
+            type='submit'
               sx={{
                 backgroundColor: "#007bff",
                 color: "#ffffff",
@@ -91,8 +156,9 @@ const Login = () => {
                   backgroundColor: "#0056b3",
                 },
               }}
+              disabled={loading}
             >
-              Log In
+              {loading ? "Loging In..." : "Log In"}
             </Button>
             <Box
               sx={{

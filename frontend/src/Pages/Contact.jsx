@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import {
   Box,
@@ -10,11 +10,58 @@ import {
   Typography,
 } from "@mui/joy";
 import img1 from "../assests/contact.png";
+import Axios from "../axios/Axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Contact = () => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await Axios.post("/contact", {
+        username,
+        email,
+        message,
+      });
+      console.log(response);
+      toast.success("Message Submitted Successfully !", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+      });
+
+      setUsername("");
+      setEmail("");
+      setMessage("");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to send message", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <Navbar />
+      <ToastContainer />
       <Box
         sx={{
           width: "100%",
@@ -74,6 +121,8 @@ const Contact = () => {
             }}
           >
             <Box
+              component={"form"}
+              onSubmit={submitHandler}
               sx={{
                 gap: 2,
                 maxWidth: "600px",
@@ -95,12 +144,22 @@ const Contact = () => {
             >
               <FormControl>
                 <FormLabel>Name</FormLabel>
-                <Input placeholder="Enter Your Name" type="text" />
+                <Input
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Enter Your Name"
+                  type="text"
+                />
               </FormControl>
 
               <FormControl>
                 <FormLabel>Email</FormLabel>
-                <Input placeholder="Enter Your Email" type="email" />
+                <Input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter Your Email"
+                  type="email"
+                />
               </FormControl>
 
               <FormControl>
@@ -110,6 +169,8 @@ const Contact = () => {
                   name="message"
                   placeholder="Type your message here..."
                   required
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   minRows={4}
                   sx={{
                     resize: "both",
@@ -119,7 +180,9 @@ const Contact = () => {
                   }}
                 />
               </FormControl>
-              <Button sx={{ borderRadius: "20px" }}>Submit</Button>
+              <Button type="submit" sx={{ borderRadius: "20px" }} disabled={loading}>
+                {loading ? "Submiting..." : "Submit"}
+              </Button>
             </Box>
           </Box>
         </Box>

@@ -10,37 +10,58 @@ import {
   Typography,
 } from "@mui/joy";
 import Axios from "../axios/Axios.js";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const [name, setName] = useState("");
+  const [username, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+
+  const navigate  = useNavigate();
 
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
-    setSuccess("");
 
     try {
       const response = await Axios.post("/register", {
-        name,
+        username,
         email,
         phone,
         password,
       });
+      console.log(response);
+      toast.success("Signup successful!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+      });
 
-      setSuccess("Signup successful!");
       setName("");
       setEmail("");
       setPhone("");
       setPassword("");
+      setTimeout(() => {
+        navigate('/login');
+      }, 5000);
     } catch (err) {
-      setError(err.response?.data?.message || "Signup failed. Try again.");
+      toast.error(err.response?.data?.message || "Signup failed. Try again.", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+      });
     } finally {
       setLoading(false);
     }
@@ -49,6 +70,7 @@ const Signup = () => {
   return (
     <>
       <Navbar />
+      <ToastContainer />
       <Box
         sx={{
           width: "100%",
@@ -99,7 +121,7 @@ const Signup = () => {
                 placeholder="Enter your name"
                 type="text"
                 sx={{ borderRadius: "8px", fontSize: "16px" }}
-                value={name}
+                value={username}
                 onChange={(e) => setName(e.target.value)}
                 required
               />
@@ -152,16 +174,6 @@ const Signup = () => {
               {loading ? "Signing Up..." : "Sign Up"}
             </Button>
           </Box>
-          {error && (
-            <Typography color="red" fontSize="14px" mt={1}>
-              {error}
-            </Typography>
-          )}
-          {success && (
-            <Typography color="green" fontSize="14px" mt={1}>
-              {success}
-            </Typography>
-          )}
           <Box
             sx={{
               display: "flex",
