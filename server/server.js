@@ -5,6 +5,17 @@ const router = require("./routes/auth-routes.js");
 const contact = require('./routes/contact-routes.js');
 const connectDB = require("./utilis/db.js");
 const { errorMiddleware } = require('./middlewares/error-middleware.js');
+const cors = require('cors');
+
+
+const corsOptions = {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  };
+  
+  // Enable CORS with options
+app.use(cors(corsOptions));
 
 app.use(express.json());
 

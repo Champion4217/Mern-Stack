@@ -19,6 +19,7 @@ const Contact = () => {
         sx={{
           width: "100%",
           height: "80vh",
+          backgroundColor: "#f4f6f8",
         }}
       >
         <Box
@@ -26,9 +27,13 @@ const Contact = () => {
             width: "100%",
             height: "100%",
             display: "flex",
-            flexDirection: "row",
+            flexDirection: { md: "row" },
             justifyContent: "center",
             alignItems: "center",
+
+            "@media (max-width: 1000px)": {
+              flexDirection: "column",
+            },
           }}
         >
           <Box
@@ -38,10 +43,6 @@ const Contact = () => {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              "@media (max-width: 1000px)": {
-              
-                width:'40%' // Hide image on small screens
-              },
             }}
           >
             <Typography
@@ -52,7 +53,15 @@ const Contact = () => {
             >
               Contact Us
             </Typography>
-            <img  src={img1} alt="contact" />
+            <Box
+              sx={{
+                "@media (max-width: 1000px)": {
+                  display: "none",
+                },
+              }}
+            >
+              <img src={img1} alt="contact" />
+            </Box>
           </Box>
           <Box
             sx={{
@@ -61,16 +70,27 @@ const Contact = () => {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
+              height: "100%",
             }}
           >
             <Box
               sx={{
-                display: "flex", 
-                flexDirection: "column", 
-                gap: 2, 
-                maxWidth: "600px", 
+                gap: 2,
+                maxWidth: "600px",
                 margin: "auto",
-                width: {xs:'90%',sm:'90%' ,md:"80%", lg:'60%', xl:'50%'},
+                backgroundColor: "#ffffff",
+                borderRadius: "16px",
+                boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+                display: "flex",
+                flexDirection: "column",
+                padding: "32px",
+                width: {
+                  xs: "80%",
+                  sm: "80%",
+                  md: "80%",
+                  lg: "60%",
+                  xl: "50%",
+                },
               }}
             >
               <FormControl>
@@ -99,9 +119,7 @@ const Contact = () => {
                   }}
                 />
               </FormControl>
-              <Button sx={{borderRadius:'20px'}}>
-                Submit
-              </Button>
+              <Button sx={{ borderRadius: "20px" }}>Submit</Button>
             </Box>
           </Box>
         </Box>

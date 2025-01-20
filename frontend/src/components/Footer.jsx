@@ -18,7 +18,7 @@ const Footer = () => {
           <Typography sx={{
             color:'white',
             "@media (max-width: 500px)": {
-            fontSize: "15px", // For small screens, make it 95% width
+            fontSize: "15px", 
           },
           }}>
             © 2024 All rights reserved. SLnko Energy Pvt. Ltd.
