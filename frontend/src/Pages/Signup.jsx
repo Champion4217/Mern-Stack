@@ -13,6 +13,7 @@ import Axios from "../axios/Axios.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import img1 from "../assests/slnko.png"
 
 const Signup = () => {
   const [username, setName] = useState("");
@@ -69,12 +70,12 @@ const Signup = () => {
 
   return (
     <>
-      <Navbar />
+      
       <ToastContainer />
       <Box
         sx={{
           width: "100%",
-          height: "80vh",
+          height: "90vh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -95,6 +96,9 @@ const Signup = () => {
             gap: 2,
           }}
         >
+          
+          <img alt="landing" src={img1}/>
+         
           <Typography
             sx={{
               fontSize: "32px",

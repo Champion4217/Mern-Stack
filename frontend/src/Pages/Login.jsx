@@ -13,7 +13,8 @@ import Axios from "../axios/Axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-
+import { useAuth } from "../components/auth";
+import img1 from "../assests/slnko.png"
 const Login = () => {
 
   const [email, setEmail] = useState('');
@@ -22,7 +23,7 @@ const Login = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate('');
-
+  const {storetokenInLS} = useAuth();
 
   const submitHandler = async(e) => {
      e.preventDefault();
@@ -35,6 +36,8 @@ const Login = () => {
       });
 
       console.log(response);
+      
+      storetokenInLS(response.data.token);
 
       toast.success("Login Successfully!", {
         position:"top-right",
@@ -70,12 +73,12 @@ const Login = () => {
 
   return (
     <>
-      <Navbar isLoggedIn={isLoggedIn} onLogin={isLoggedIn} />
+      
       <ToastContainer />
       <Box
         sx={{
           width: "100%",
-          height: "80vh",
+          height: "90vh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -96,6 +99,7 @@ const Login = () => {
             gap: 2,
           }}
         >
+          <img alt="landing" src={img1}/>
           <Typography
             sx={{
               fontSize: "32px",

@@ -40,7 +40,7 @@ const Navbar = () => {
           }}
         >
           <List orientation="horizontal">
-            {["Home", "About", "Contact", "Services", "Login", "Signup"].map(
+            {["Home", "About", "Contact", "Services", "Logout"].map(
               (item) => (
                 <ListItem
                   key={item}
@@ -112,22 +112,14 @@ const Navbar = () => {
             <Button
               variant="outlined"
               component={Link}
-              to="/login"
+              to="/logout"
               aria-label="Navigate to Login"
               sx={{ width: "50%", color: "blue" }}
             >
-              Login
+              Logout
             </Button>
 
-            <Button
-              variant="outlined"
-              component={Link}
-              to="/signup"
-              aria-label="Navigate to Register"
-              sx={{ width: "50%", color: "blue" }}
-            >
-              SignUp
-            </Button>
+            
           </Stack>
         </Box>
       </Drawer>
