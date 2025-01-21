@@ -3,20 +3,21 @@ import { createContext, useContext, useState } from "react";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-
-  const [token, setToken] = useState(localStorage.getItem('token'));  
+  const [token, setToken] = useState(localStorage.getItem("token"));  
 
   const storetokenInLS = (serverToken) => {
-    return localStorage.setItem("token", serverToken);
+    localStorage.setItem("token", serverToken);
+    setToken(serverToken); // Update token state
   };
 
-  let isLoggedIn = !!token;
-  console.log(isLoggedIn);
-  
   const LogoutUser = () => {
-    setToken('');
-    return localStorage.removeItem("token");
-  }
+    setToken(''); // Clear token state
+    localStorage.removeItem("token");
+  };
+
+  const isLoggedIn = !!token; // Reactively computed from token
+
+  console.log("isLoggedIn:", isLoggedIn);
 
   return (
     <AuthContext.Provider value={{ storetokenInLS, LogoutUser, isLoggedIn }}>
@@ -26,5 +27,5 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => {
-    return useContext(AuthContext);
-}
+  return useContext(AuthContext);
+};
