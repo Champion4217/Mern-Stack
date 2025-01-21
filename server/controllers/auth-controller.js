@@ -68,6 +68,8 @@ const login = async(req, res, next) => {
         return res.status(200).json({
             success: true,
             message: `Login Successfully ${userExists.username}`,
+            token: await userExists.generateToken(),
+            userId: userExists._id.toString(),
         })
     } catch (error) {
         return res.status(500).json({
